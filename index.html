@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>CAMPUSPULSE · Smart campus, in sync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview" aria-label="CAMPUSPULSE home">
+        <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 18h5l3-8 5 14 4-10 3 4h4"/></svg></span>
+        <span class="brand-word">CAMPUS<span>PULSE</span></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav-list">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">◫</span>Overview</a>
+        <a class="nav-link" href="#rooms"><span class="nav-icon">⌂</span>Room finder <span class="nav-count" id="nav-room-count">24</span></a>
+        <a class="nav-link" href="#facilities"><span class="nav-icon">◉</span>Facility pulse</a>
+        <a class="nav-link" href="#eda"><span class="nav-icon">▥</span>Data exploration</a>
+        <a class="nav-link" href="#observations"><span class="nav-icon">＋</span>Log an observation</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-card"><span class="privacy-icon">⌁</span><div><b>Privacy by design</b><p>No student tracking. Activity is estimated from timetable patterns.</p></div></div>
+        <div class="profile"><span class="avatar">CS</span><div class="profile-copy"><b>Computer Science</b><span>Department view</span></div><span class="profile-dots">···</span></div>
+      </div>
+    </aside>
+
+    <main class="main" id="overview">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><i>/</i><b>Overview</b></div>
+        <div class="top-actions"><span class="live-indicator"><i></i> TIMETABLE CONNECTED</span><button class="icon-button" id="refresh-button" title="Refresh schedule view" aria-label="Refresh schedule view">↻</button><span class="top-avatar">A</span></div>
+      </header>
+
+      <section class="page-heading">
+        <div><div class="eyebrow"><span class="eyebrow-dot"></span>SMART CAMPUS INTELLIGENCE</div><h1>Campus, in sync.</h1><p class="heading-subtitle">A clearer view of campus activity, built around your timetable.</p></div>
+        <div class="date-chip"><span class="calendar-icon">▦</span><div><b id="today-label">Today</b><span id="clock-label">--:--</span></div><span class="timezone-label">IST</span></div>
+      </section>
+
+      <div class="notice"><span class="notice-icon">✦</span><div><b>Prototype predictions</b><span>Facility history isn’t connected yet. Demand levels use a transparent timetable-based estimate until observations are collected.</span></div><a href="#observations">Add data <span>↗</span></a></div>
+
+      <section class="metric-grid" aria-label="Campus summary">
+        <article class="metric-card metric-primary"><div class="metric-top"><span>STUDY ROOMS TO CHECK</span><span class="metric-icon icon-blue">⌂</span></div><div class="metric-value" id="rooms-value">—</div><div class="metric-caption"><span class="metric-caption-dot blue-dot"></span><span id="rooms-caption">Checking timetable…</span></div><div class="metric-spark spark-blue"><svg viewBox="0 0 120 40" preserveAspectRatio="none"><path d="M0 30 C15 30 17 17 30 22 S48 37 60 20 78 12 90 18 106 6 120 9"/></svg></div></article>
+        <article class="metric-card"><div class="metric-top"><span>DIVISIONS WITHOUT A CLASS</span><span class="metric-icon icon-violet">▦</span></div><div class="metric-value" id="free-divisions-value">—<small>/ 30</small></div><div class="metric-caption"><span class="metric-caption-dot violet-dot"></span><span id="free-divisions-caption">At selected time</span></div><div class="metric-spark spark-violet"><svg viewBox="0 0 120 40" preserveAspectRatio="none"><path d="M0 27 C14 29 18 11 31 18 S49 33 61 17 78 8 90 16 107 8 120 6"/></svg></div></article>
+        <article class="metric-card"><div class="metric-top"><span>ESTIMATED FREE STUDENTS</span><span class="metric-icon icon-green">♙</span></div><div class="metric-value" id="free-students-value">—</div><div class="metric-caption"><span class="metric-caption-dot green-dot"></span><span id="student-caption">Illustrative headcount proxy</span></div><div class="metric-spark spark-green"><svg viewBox="0 0 120 40" preserveAspectRatio="none"><path d="M0 29 C15 26 18 21 31 24 S47 33 60 19 77 14 90 19 106 9 120 7"/></svg></div></article>
+        <article class="metric-card"><div class="metric-top"><span>TIMETABLE COVERAGE</span><span class="metric-icon icon-orange">◷</span></div><div class="metric-value">30<small> divisions</small></div><div class="metric-caption"><span class="metric-caption-dot orange-dot"></span><span>Mon–Sat · 08:00–20:00</span></div><div class="metric-spark spark-orange"><svg viewBox="0 0 120 40" preserveAspectRatio="none"><path d="M0 31 C14 31 18 21 30 19 S48 26 61 18 79 5 91 15 106 9 120 8"/></svg></div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel trend-panel">
+          <div class="panel-heading"><div><div class="section-kicker">CAMPUS ACTIVITY</div><h2>Timetable pulse</h2><p class="panel-subtitle">Divisions with no detected class by hour</p></div><label class="select-wrap"><span class="sr-only">Choose day</span><select id="day-select"></select><span class="select-chevron">⌄</span></label></div>
+          <div class="chart-legend"><span><i class="legend-line"></i>Potentially free divisions</span><span class="legend-muted">out of 30 divisions</span></div>
+          <div class="chart-wrap" id="chart-wrap"><svg id="activity-chart" viewBox="0 0 680 210" role="img" aria-label="Potentially free divisions by hour"></svg></div>
+          <div class="chart-foot"><span><i></i>Timetable-derived · no student-level tracking</span><span id="chart-note">Select a time to update the dashboard</span></div>
+        </article>
+        <article class="panel focus-panel">
+          <div class="panel-heading"><div><div class="section-kicker">YOUR MOMENT</div><h2>Check a time</h2><p class="panel-subtitle">Explore now or plan ahead</p></div><span class="focus-icon">⌖</span></div>
+          <div class="time-inputs"><label>Date<span><input id="date-input" type="date"></span></label><label>Time<span><input id="time-input" type="time" step="3600"></span></label></div>
+          <div class="selected-day"><span class="selected-day-icon">◷</span><span id="selected-time-label">Choose a date and time</span></div>
+          <div class="focus-divider"></div>
+          <div class="assumption-row"><div><b>Students per division</b><span>Adjust this estimate</span></div><div class="stepper"><button id="strength-minus" aria-label="Decrease assumed student count">−</button><output id="strength-value">50</output><button id="strength-plus" aria-label="Increase assumed student count">+</button></div></div>
+          <div class="assumption-note">Assumption only. Add verified division counts for accurate headcounts.</div>
+          <button class="primary-button" id="find-room-button">Find a study room <span>↗</span></button>
+        </article>
+      </section>
+
+      <section class="panel eda-panel" id="eda">
+        <div class="panel-heading"><div><div class="section-kicker">EXPLORATORY DATA ANALYSIS</div><h2>What the timetable contains</h2><p class="panel-subtitle">Descriptive patterns from the extracted schedule, before fitting a model.</p></div><span class="eda-tag">REAL TIMETABLE DATA</span></div>
+        <div class="eda-grid">
+          <div><div class="eda-subhead">Class card mix</div><div class="activity-bars" id="activity-bars"></div></div>
+          <div><div class="eda-subhead">Extraction quality</div><div class="quality-list" id="quality-list"></div></div>
+        </div>
+        <div class="eda-takeaway" id="eda-takeaway">EDA summaries load with the timetable.</div>
+        <div class="heatmap-heading"><div><div class="eda-subhead">Weekly free-division map</div><span>Choose a cell to inspect that day and hour</span></div><div class="heat-legend"><span>Fewer free</span><i class="heat-1"></i><i class="heat-2"></i><i class="heat-3"></i><i class="heat-4"></i><span>More free</span></div></div>
+        <div class="heatmap-scroll"><div id="weekly-heatmap" class="weekly-heatmap" role="group" aria-label="Weekly timetable availability heatmap"></div></div>
+        <div class="eda-foot">Class cards are timetable entries, not attendance records. “No class card” is a schedule proxy only.</div>
+      </section>
+
+      <section class="panel rooms-panel" id="rooms">
+        <div class="panel-heading rooms-heading"><div><div class="section-kicker">STUDY SPACE</div><h2>Study rooms at selected time <span class="heading-live"><i></i> SCHEDULE VIEW</span></h2><p class="panel-subtitle" id="room-subtitle">Available rooms are inferred from the uploaded Computer Science timetable.</p></div><a class="text-link" href="#rooms-list">View all candidates <span>→</span></a></div>
+        <div class="room-warning"><span>ⓘ</span><p>These are candidate-free rooms based on the uploaded timetable only. Confirm there isn’t a current class, event, or booking before settling in.</p></div>
+        <div class="room-filters"><label class="room-search"><span>⌕</span><input id="room-search" type="search" placeholder="Search room code" aria-label="Search room code"></label><label class="duration-select">Keep room free for<select id="room-duration" aria-label="Required consecutive free hours"><option value="1">1 hour</option><option value="2">2 hours</option><option value="3">3 hours</option><option value="4">4 hours</option></select></label><button type="button" class="favorite-filter" id="favorites-only" aria-pressed="false">☆ Favorites only</button></div>
+        <div class="room-list" id="rooms-list"><div class="empty-state">Loading timetable rooms…</div></div>
+        <div class="room-footer"><span class="room-footer-icon">⌂</span><span id="room-footer-text">24 room codes found in the timetable</span><span class="room-footer-divider"></span><span>Room capacity and building locations not provided</span></div>
+      </section>
+
+      <section class="section-heading" id="facilities"><div><div class="section-kicker">FACILITY FORECAST</div><h2>Demand outlook</h2><p>Relative pressure from timetable signals and observed facility data.</p></div><span class="forecast-badge" id="forecast-badge"><i></i> RULE-BASED PREVIEW</span></section>
+      <section class="facility-grid" aria-label="Facility demand estimates">
+        <article class="facility-card"><div class="facility-head"><span class="facility-icon canteen-icon">♨</span><span class="facility-tag">FOOD & DRINK</span><span class="facility-arrow">↗</span></div><h3>Canteen</h3><div class="facility-result" id="canteen-result">—</div><div class="pressure-track"><span id="canteen-bar"></span></div><p id="canteen-copy">Using free-division share and lunch-time weighting.</p><div class="facility-data-needed">Model output <b id="canteen-measure">needs historical logs</b></div></article>
+        <article class="facility-card"><div class="facility-head"><span class="facility-icon xerox-icon">▤</span><span class="facility-tag">PRINT & COPY</span><span class="facility-arrow">↗</span></div><h3>Xerox center</h3><div class="facility-result" id="xerox-result">—</div><div class="pressure-track"><span id="xerox-bar"></span></div><p id="xerox-copy">Using timetable signal and class-change weighting.</p><div class="facility-data-needed">Model output <b id="xerox-measure">needs job logs</b></div></article>
+        <article class="facility-card"><div class="facility-head"><span class="facility-icon library-icon">▤</span><span class="facility-tag">STUDY SPACE</span><span class="facility-arrow">↗</span></div><h3>Library</h3><div class="facility-result" id="library-result">—</div><div class="pressure-track"><span id="library-bar"></span></div><p id="library-copy">Relative demand signal from timetable availability.</p><div class="facility-data-needed">Model output <b id="library-measure">needs seat counts</b></div></article>
+        <article class="facility-card"><div class="facility-head"><span class="facility-icon parking-icon">P</span><span class="facility-tag">PARKING</span><span class="facility-arrow">↗</span></div><h3>Parking</h3><div class="facility-result" id="parking-result">—</div><div class="pressure-track"><span id="parking-bar"></span></div><p id="parking-copy">Relative arrival pressure from the timetable signal.</p><div class="facility-data-needed">Model output <b id="parking-measure">needs occupancy logs</b></div></article>
+      </section>
+
+      <section class="panel observations-panel" id="observations">
+        <div class="panel-heading"><div><div class="section-kicker">HELP THE MODEL LEARN</div><h2>Log a campus observation</h2><p class="panel-subtitle">A few real measurements will let CAMPUSPULSE replace preview rules with learned predictions.</p></div><button class="secondary-button" id="download-observations">↓ Export observations</button></div>
+        <form id="observation-form" class="observation-form">
+          <label>Date<input id="obs-date" type="date" required></label>
+          <label>Time<input id="obs-time" type="time" required></label>
+          <label>Facility<select id="obs-facility"><option>Canteen</option><option>Xerox</option><option>Library</option><option>Parking</option></select></label>
+          <label>People / spaces used<input id="obs-occupancy" type="number" min="0" placeholder="e.g. 42"></label>
+          <label>Total capacity<input id="obs-capacity" type="number" min="1" placeholder="e.g. 120"></label>
+          <label>Wait (minutes)<input id="obs-wait" type="number" min="0" step="1" placeholder="optional"></label>
+          <label>Queue / jobs<input id="obs-queue" type="number" min="0" placeholder="optional"></label>
+          <label class="event-check"><input id="obs-event" type="checkbox"> Exam or campus event</label>
+          <label class="observation-notes">Notes<input id="obs-notes" type="text" maxlength="180" placeholder="Optional context"></label>
+          <button type="submit" class="primary-button save-observation">Save observation <span>＋</span></button>
+        </form>
+        <div class="observation-footer"><span><b id="observation-count">0</b> observations saved in this browser</span><button id="clear-observations" class="quiet-button">Clear saved entries</button></div>
+      </section>
+
+      <footer class="page-footer"><span>© CAMPUSPULSE · Computer Science Department</span><span>Timetable-derived estimates · no individual student data</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

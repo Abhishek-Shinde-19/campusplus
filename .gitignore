@@ -1,0 +1,8 @@
+tmp/
+__pycache__/
+*.py[cod]
+.venv/
+models/*.joblib
+CAMPUSPULSE .pdf
+time tables.pdf
+data/CAMPUSPULSE_All_Divisions_Sorted_Timetable_with_Room_No.xlsx

@@ -1,0 +1,60 @@
+{
+  "source": "data/timetable_clean.csv",
+  "event_rows": 1396,
+  "unique_divisions": 30,
+  "division_events_by_year": {
+    "Final": 27,
+    "SY": 596,
+    "TY": 773
+  },
+  "event_rows_by_activity_type": {
+    "lab": 622,
+    "theory": 561,
+    "tutorial": 213
+  },
+  "event_rows_by_day": {
+    "Monday": 204,
+    "Tuesday": 267,
+    "Wednesday": 273,
+    "Thursday": 271,
+    "Friday": 255,
+    "Saturday": 126
+  },
+  "room_assignment_status": {
+    "extracted": 1175,
+    "needs_verification": 53,
+    "not_specified_in_source": 168
+  },
+  "batch_read_status": {
+    "needs_verification": 1362,
+    "verified_ocr": 34
+  },
+  "rooms_with_at_least_one_extracted_label": 24,
+  "hourly_slots": 72,
+  "most_divisions_without_class": {
+    "day": "Monday",
+    "start_time": "18:00",
+    "end_time": "19:00",
+    "total_divisions": 30,
+    "divisions_with_class_card": 0,
+    "divisions_without_detected_class": 30,
+    "potentially_free_division_ratio": 1.0,
+    "interpretation": "schedule proxy; not a student headcount"
+  },
+  "fewest_divisions_without_class": {
+    "day": "Friday",
+    "start_time": "13:00",
+    "end_time": "14:00",
+    "total_divisions": 30,
+    "divisions_with_class_card": 28,
+    "divisions_without_detected_class": 2,
+    "potentially_free_division_ratio": 0.0667,
+    "interpretation": "schedule proxy; not a student headcount"
+  },
+  "data_caveats": [
+    "Weekly timetable presence is a proxy for potential availability; it is not actual student movement.",
+    "Division-level free counts do not resolve incomplete batch labels.",
+    "Room assignments may be absent or OCR-ambiguous.",
+    "No facility outcome measurements, division strengths, capacities, or live bookings were supplied."
+  ]
+}
